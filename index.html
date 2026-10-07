@@ -6,19 +6,21 @@
     <title>Mine Most Favourite Rajkor</title>
     <style>
         :root {
-            --bg: #090d16;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --primary: #ff6b8b;
-            --secondary: #4ea8de;
-            --card-glow: rgba(255, 107, 139, 0.15);
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-gold: #e2e8f0;
+            --accent-glow: rgba(226, 232, 240, 0.03);
+            --timeline-line: #475569;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         html {
@@ -26,16 +28,17 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
+        /* Smooth Scroll Fade In Effect */
         .fade-in {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         .fade-in.visible {
@@ -43,234 +46,206 @@
             transform: translateY(0);
         }
 
+        /* Hero Header Section */
         .hero {
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
-            background: radial-gradient(circle at center, rgba(255, 107, 139, 0.08) 0%, transparent 70%);
         }
 
         .hero .sub-title {
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-size: 1.1rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
+            letter-spacing: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
         }
 
         .hero .main-title {
-            font-size: 6.5rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, #ff6b8b, #ff8fa3, #4ea8de);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px rgba(255,107,139,0.2));
+            font-size: 5.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
         }
 
         .scroll-indicator {
             position: absolute;
             bottom: 40px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             letter-spacing: 2px;
             text-transform: uppercase;
-            animation: bounce 2s infinite;
         }
 
+        /* Story Container */
         .story-container {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 0 25px;
+            padding: 0 20px;
         }
 
         .story-block {
-            margin: 120px 0;
+            margin: 90px 0;
             position: relative;
-        }
-
-        .routine-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(255,107,139,0.15), rgba(78,168,222,0.15));
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #ff8fa3;
-            margin-bottom: 20px;
         }
 
         .story-card {
-            background: rgba(22, 31, 51, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            position: relative;
-        }
-
-        .story-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 24px;
-            box-shadow: inset 0 0 15px var(--card-glow);
-            pointer-events: none;
-            opacity: 0.5;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
         .story-card h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #f8f9fa, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
         }
 
         .story-card p {
-            font-size: 1.1rem;
-            color: #d1d5db;
-            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
         }
 
-        .mood-indicator {
-            font-style: italic;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
+        /* Big Conclusion Message */
         .final-letter {
-            max-width: 850px;
-            margin: 150px auto 100px;
-            padding: 60px 40px;
-            background: linear-gradient(135deg, rgba(22, 31, 51, 0.8), rgba(9, 13, 22, 0.9));
-            border: 2px solid rgba(255, 107, 139, 0.3);
-            border-radius: 32px;
+            max-width: 760px;
+            margin: 120px auto 80px;
+            padding: 50px 35px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(255, 107, 139, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .final-letter h3 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 24px;
         }
 
         .final-letter p {
-            font-size: 1.25rem;
-            color: #f3f4f6;
-            line-height: 1.8;
-            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .highlight-text {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 30px 0;
+            padding: 15px;
+            border-left: 3px solid var(--text-primary);
+            border-right: 3px solid var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .signature {
-            margin-top: 40px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            margin-top: 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         @media (max-width: 768px) {
-            .hero .main-title { font-size: 4rem; }
-            .hero .sub-title { font-size: 1.1rem; }
+            .hero .main-title { font-size: 3.5rem; }
+            .hero .sub-title { font-size: 0.95rem; }
             .story-card { padding: 25px; }
-            .final-letter { padding: 40px 20px; }
-            .final-letter p { font-size: 1.1rem; }
+            .final-letter { padding: 35px 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Hero Header -->
     <section class="hero">
         <div class="sub-title">mine most favourite</div>
         <div class="main-title">Rajkor</div>
-        <div class="scroll-indicator">Scroll down slowly to read our story ↓</div>
+        <div class="scroll-indicator">Scroll down to read our story</div>
     </section>
 
+    <!-- Main Content Grid -->
     <div class="story-container">
 
+        <!-- Chapter 1 -->
         <div class="story-block fade-in">
             <div class="story-card">
-                <h2>The Snapchat Chaos</h2>
-                <p>Everything kicked off with pure comedy. Her little sister Didu decided to start some drama and told Rajkor that I was talking to her. Rajkor got all excited and slammed that friend request button! Honestly, I didn't accept it at first, so she immediately cancelled it out of panic. I felt bad, sent one back, and then... absolute silence. We both sat there for 3 or 4 days not saying a single word. Talk about awkward! 😂</p>
+                <h2>The Snapchat Connection</h2>
+                <p>Everything kicked off with pure comedy. Her little sister Didu sparked the curiosity, telling Rajkor that I was talking to her. Rajkor got all excited and sent a Snapchat friend request. After a brief dynamic where the request was cancelled and sent right back, a silent connection was built. We both sat there for 3 or 4 days without saying a single word.</p>
             </div>
         </div>
 
+        <!-- Chapter 2 -->
         <div class="story-block fade-in">
             <div class="story-card">
-                <h2>Breaking Ice Over Bapu Uncle</h2>
-                <p>The ice didn't just break; it shattered when I sent a random snap of Mayur (Konda) Reddy getting completely scolded by Bapu Uncle. She instantly replied, <em>"Do you also say him Konda?"</em> I said yes, and just like that, the endless talking began. Fast forward to June 28th—her birthday. I messaged her, and oh man... she literally stood there ignoring her own birthday party just to sit on her phone and keep talking to me! ❤️</p>
+                <h2>Breaking Ice Over Laughter</h2>
+                <p>The ice finally broke when I sent a random snap of Mayur getting completely scolded. She instantly replied, asking if I also called him by his nickname, and just like that, the endless talking began. Fast forward to June 28th—her birthday. I messaged her, and she spent the evening talking, sharing the start of her day with me despite her party happening all around her.</p>
             </div>
         </div>
 
+        <!-- Chapter 3 -->
         <div class="story-block fade-in">
             <div class="story-card">
-                <h2>Voice Mails & Hidden Fears</h2>
-                <p>July was an absolute breeze. She would constantly spam me with voice messages, and because I absolutely hate the sound of my own voice, I stubbornly replied in text only. She kept asking, I kept denying, until one day I finally cave and sent her a tiny voice note. But things got crazy on July 27th. She messaged my girlfriend Gauri on Instagram asking where I was. I lost my mind, got incredibly mean and rude, and blocked her for 10 long days... completely forgetting she was dealing with period pains. I still feel terrible about being such a jerk! 🥺</p>
+                <h2>Voice Notes and Growth</h2>
+                <p>The whole month of July went incredibly well. A unique dynamic formed: she would constantly send voice messages, and because I wasn't fond of the sound of my own voice, I stuck strictly to text bubbles. Eventually, I sent her a short voice note. Even through rough patches, misunderstandings, and days of complete silence later in the month, we managed to find our footing again.</p>
             </div>
         </div>
 
+        <!-- Chapter 4 -->
         <div class="story-block fade-in">
-            <span class="routine-tag">⏰ 14:40 • "Aalo Me!"</span>
             <div class="story-card">
-                <h2>Reconnections & Endless "Bak Bak"</h2>
-                <p>After a quick text on August 9th, I vanished offline for 20 days straight. But destiny brought us right back around September 1st when she sent an Instagram request. I accepted, apologized for being an idiot, and mid-September brought us our very first voice call. Ever since, regular calls became our thing. Mostly, she just talks and talks, and honestly? <span class="mood-indicator">I just love listening to her endless bak bak... xD</span></p>
+                <h2>Reconnections & Continuous Conversations</h2>
+                <p>After being completely offline for a stretch of 20 days, destiny brought us right back around early September when she reached out on Instagram. Apologies were made, things healed, and mid-September brought us our very first voice call. Ever since, regular calls became our thing. Mostly, she just talks and talks, and I genuinely love just sitting back and listening to her endless updates.</p>
             </div>
         </div>
 
+        <!-- Chapter 5 -->
         <div class="story-block fade-in">
-            <span class="routine-tag">⏰ 20:40 • "Aalo Me!"</span>
             <div class="story-card">
-                <h2>The Mavshi Panic & Reel Magic</h2>
-                <p>October started with a heart attack. Her Mavshi found out we talk! Rajkor saved the day by lying that we only spoke once back during the Mayur scolding snap. We were sweating bullets thinking we could never speak again, but we survived. By Sunday night, we were randomly blasting each other with couple and romantic reels. Next morning? Total confusion: <em>"What were we doing last night?!"</em> Only for her mood swings to hit the next day to tell me, <em>"You are not my boyfriend."</em> I just smile because I completely understand her. 🎢</p>
+                <h2>Shared Humour & Navigating Obstacles</h2>
+                <p>October brought its own share of panic when family structural boundaries came into play, leaving us worried we wouldn't be able to stay in touch. Luckily, the tension dissolved quickly. We shifted into a fun phase of constantly sharing relatable, lighthearted couple reels back and forth, navigating her natural mood swings with complete patience and mutual understanding.</p>
             </div>
         </div>
 
+        <!-- Final Message Section -->
         <div class="final-letter fade-in">
             <h3>To My Absolute Favourite Human...</h3>
             <p>
-                Look at us today. Just before you left for tuition at 6:00 PM, you were in this incredibly sweet, romantic, and naughty mood... and like a total clown, I was in a completely mismatched joke-around mood. I hurt you, you left angry, and when you got back at 8:40 PM, you totally yelled at me and hit me with the ultimate line: <strong>"You are only like my brother."</strong> 
+                Regardless of our chaotic mood swings, the minor disagreements, the brief moments of silence, and the crazy misunderstandings we run into... I want you to know something clearly.
             </p>
+            
+            <div class="highlight-text">
+                "I never want to lose you, and I want to create a lifetime of amazing memories with you."
+            </div>
+            
             <p>
-                My mood instantly crashed. And even though I secretly love when you get angry at me, it cut deep! But regardless of our chaotic mood swings, the fights, the blocking, and the crazy misunderstandings... I need you to know something clearly.
+                Whether it's laughing at inside jokes, sharing updates throughout the day, or waiting to hear from you the exact moment you get back from school or tuition... you are irreplaceable to me. Thank you for all the laughter, the stability, and the pure joy you bring into my life. Let's keep making this story longer.
             </p>
-            <p style="font-size: 1.5rem; font-weight: 700; color: #ff8fa3; margin: 35px 0;">
-                "I never want to lose you, and I want to create a lifetime of crazy memories with you."
-            </p>
-            <p>
-                Whether it's laughing at Mayur, text vs. voice battles, or waiting to hear you drop your daily messages right when you get home from school or tuition... you are irreplaceable. Thank you for all the laughter, the emotional roller coasters, and the pure joy you bring into my life. Let's keep making this story longer.
-            </p>
-            <div class="signature">Forever Your Favorite Headache, <br>Tanishq</div>
+            
+            <div class="signature">Tanishq</div>
         </div>
-
     </div>
 
     <script>
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.15
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
